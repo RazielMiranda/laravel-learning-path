@@ -170,14 +170,44 @@ Como criar componentes?
 
 Como criar formulários no laravel?
 
-## Metodos HTTP
+### Metodos HTTP
 
 Os metodos HTTP são todos os tipos de requisição que temos na internet
-
 
 ### Metodos HTTP (HTTP Client "guzzlehttp")
 
 Fazer requisições de API em json
+
+### Validação de formulários
+
+para validar usamos o metodo validate
+
+## Template usando blade
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

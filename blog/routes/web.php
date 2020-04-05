@@ -77,7 +77,7 @@ Route::get('/', function () {
 // });	
 
 //Criando rota para a vire do form de user
-Route::view('userview', 'user');
+// Route::view('userview', 'user');
 
 //Mandando via post, lembrando que a action do form tem que bater com o nome da rota daqui
 //Route::post('userscontroller','UsersController@account');
@@ -85,7 +85,8 @@ Route::view('userview', 'user');
 //Mandando via get, lembrando que altera o metodo do form e do controler
 Route::post('userscontroller','UsersController@account');
 
-
+//Retornando a view que contém o template de blade
+Route::get('userview', 'UsersController@index');
 
 
 
