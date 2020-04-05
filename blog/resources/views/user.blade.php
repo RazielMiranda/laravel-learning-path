@@ -1,4 +1,8 @@
 <h1>User account:</h1>
+<!-- 
+
+Listando os erros em lista
+
 @if($errors->any())
 <div>
 	<ul>
@@ -6,15 +10,23 @@
 		<li>{{$err}}</li>
 		@endforeach
 	</ul>
-</div>
+</div> 
 @endif
+
+-->
 <form action="userscontroller" method="post">
 	<h2>post</h2>
 	<input type="text" name="email">
+	@error('email')
+		<span>{{$message}}</span>
+	@enderror
 	<br>
 	<br>
 	{{@csrf_field()}}
 	<input type="text" name="password" type="password">
+	@error('password')
+		<span>{{$message}}</span>
+	@enderror
 	<br>
 	<br>
 	<button type="submit">submit</button>

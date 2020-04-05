@@ -19,8 +19,8 @@ class UsersController extends Controller
 
 	    	//Pegando todos os input do formulario quando via post e validando eles
 	    	return $req->validate([
-	    		'email' => 'required',
-	    		'password' => 'required'
+	    		'email' => 'required | min: 3 | max: 10',
+	    		'password' => 'required | email'
 	    	]);
 
 	    	//Caso queira apenas um campo do formulario quando via post
