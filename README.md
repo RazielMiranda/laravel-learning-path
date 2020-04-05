@@ -166,7 +166,13 @@ Como criar componentes?
 
 	php artisan make:components Header
 
+## Formulários
 
+Como criar formulários no laravel?
+
+## Metodos HTTP
+
+Os metodos HTTP são todos os tipos de requisição que temos na internet
 
 
 

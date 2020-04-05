@@ -60,6 +60,26 @@ Route::get('/', function () {
 // Route::view('example','example');
 
 //Mandando dados para o componente a partir da rota
-Route::get('/sample', function () {
-    return view('sample', ['name'=>'raziel foda']);
-});	
+// Route::get('/sample', function () {
+//     return view('sample', ['name'=>'raziel foda']);
+// });	
+
+//Criando rota para a vire do form de user
+Route::view('userview', 'user');
+
+//Mandando via post, lembrando que a action do form tem que bater com o nome da rota daqui
+//Route::post('userscontroller','UsersController@account');
+
+//Mandando via get, lembrando que altera o metodo do form e do controler
+Route::get('userscontroller','UsersController@account');
+
+
+
+
+
+
+
+
+
+
+
