@@ -20,3 +20,25 @@ Route::get('/', function () {
 Route::get('/sample', function () {
     return view('sample');
 });
+
+// Route::get('/sample/{id}', function ($id) {
+// 	echo $id;
+//     return view('sample');
+// });
+
+// Route::view('here','sample');
+
+// Route::redirect('/','sample');
+
+// Route::get('/', function () {
+//     return redirect('sample');
+// });
+
+Route::get('users','Users@index');
+Route::get('users2/{id}','Users@show');
+
+
+
+
+
+

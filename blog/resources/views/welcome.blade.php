@@ -84,6 +84,8 @@
                     Laravel Tutorial
                 </div>
 
+                    <a href="here"> GO TO SAMPLE PAGE</a>
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
