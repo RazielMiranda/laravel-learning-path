@@ -19,7 +19,6 @@ https://www.youtube.com/watch?v=694SP68iy-o&list=PL8p2I9GklV46twRyl207h5LcsdjB9S
 
 ### Estrutura de diretorios
 
-	após isso ir até a pasta "routes" e dentro dessa pasta editar o arquivo "web", esse arquivo basicamente é onde você faz a construção das rotas ou seja das URL do sistema, basta copiar o modelo da rota welcome.
 	Onde se escreve:	Html (dir views)
 							- Quando se quer criar novas páginas
 	                	Model (dir app)
@@ -127,6 +126,75 @@ Para que possa exibir os dados desse controller é necessário fazer uma rota co
 Quando bater nessa rota irá exibir a informação do controller que ele retornou, é possível chamar mais de uma função do controller e também pegar parametros para isso basta adicionar o parametro entre chaves
 
 	Route::get('users/{id}','Users@show');
+
+### Visualização (Views)
+
+O que são views?
+
+Se trata da visualização do projeto feitas em HTML, CSS e JS.
+
+Como fazer views?
+
+Dentro da pasta views que está em resources, basta criar um arquivo blade.
+
+Para exibir a pagina pelas rotas, parametro da url e nome da view
+
+		Route::view('sample','sample');
+
+Para exibir pelo controller
+
+	function sample()
+	{
+		return view('sample');
+	}
+
+	//Dentro das rotas chamar o controller
+	Routes::('sample','Users@sample');
+
+Como passar dados do controller para a view?
+
+	Routes::('sample','Users@sample',[name]);
+
+
+### Visualização (Views - Components)
+
+O que são componentes?
+
+Códigos de front-end que podem ser reutilizados dentro do projeto, como menus, rodapé, caixas de busca etc
+
+Como criar componentes?
+
+	php artisan make:components Header
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

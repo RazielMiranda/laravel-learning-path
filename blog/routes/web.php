@@ -13,32 +13,53 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Rota basica
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sample', function () {
-    return view('sample');
-});
+//Rota editada
+// Route::get('/sample', function () {
+//     return view('sample');
+// });	
 
+//Rota que pega dados da URL
 // Route::get('/sample/{id}', function ($id) {
 // 	echo $id;
 //     return view('sample');
 // });
 
+
+//Rota de view
 // Route::view('here','sample');
 
+//Rota de redirecit 1
 // Route::redirect('/','sample');
 
+//Rota de redirect 2
 // Route::get('/', function () {
 //     return redirect('sample');
 // });
 
-Route::get('users','Users@index');
-Route::get('users2/{id}','Users@show');
+//Chamando o metodo index do controle user atraves do parametro user na url
+// Route::get('users','Users@index');
 
+//Chamando o metodo show que no controler pega o dado que foi enviado pela URL
+// Route::get('users2/{id}','Users@show');
 
+//Chamando o metodo sample que retorna a view que esta no controller
+// Route::get('users','Users@sample');
 
+//Setando o valor da variavel {{$name}} que esta na view atraves da rota
+// Route::view('sample','sample',['name'=>'igor']);
 
+//Chamando uma view que esta em outro diretorio
+// Route::view('nav.sample','sample',['name'=>'igor']);
 
+//Chamando o componente Example
+// Route::view('example','example');
 
+//Mandando dados para o componente a partir da rota
+Route::get('/sample', function () {
+    return view('sample', ['name'=>'raziel foda']);
+});	
