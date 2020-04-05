@@ -17,11 +17,17 @@ class UsersController extends Controller
 	    	//Pegando todos os input do formulario quando via post
 	    	// return $req->input();
 
+	    	//Pegando todos os input do formulario quando via post e validando eles
+	    	return $req->validate([
+	    		'email' => 'required',
+	    		'password' => 'required'
+	    	]);
+
 	    	//Caso queira apenas um campo do formulario quando via post
 	    	//return $req->input('email');
 
 	    	//Pegando dados do form quando via get
-	    	return $req->query();
+	    	// return $req->query();
 
 
 	    }    

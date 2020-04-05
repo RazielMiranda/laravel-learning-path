@@ -175,9 +175,9 @@ Como criar formulários no laravel?
 Os metodos HTTP são todos os tipos de requisição que temos na internet
 
 
+### Metodos HTTP (HTTP Client "guzzlehttp")
 
-
-
+Fazer requisições de API em json
 
 
 

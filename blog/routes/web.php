@@ -2,6 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
+//Usando o guzzlehttp para fazer requisições de API
+// use Illuminate\Support\Facades\Http;
+
+// $resp = Http::get('https://viacep.com.br/ws/17054050/json/');
+
+// Para enviar dados para a API
+// $resp = Http::post('https://viacep.com.br/ws/17054050/json/', ['name'=>'raziel teste']);
+
+
+//Declara uma variavel com a resposta do metodo
+// dd($resp->body());
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,7 +83,7 @@ Route::view('userview', 'user');
 //Route::post('userscontroller','UsersController@account');
 
 //Mandando via get, lembrando que altera o metodo do form e do controler
-Route::get('userscontroller','UsersController@account');
+Route::post('userscontroller','UsersController@account');
 
 
 
