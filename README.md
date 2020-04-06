@@ -389,57 +389,74 @@ Usando include:
 
 ### Blade template layout
 
+Reutilizar páginas de blade em outras páginas, com um layout padrão de CSS e etc assim como de JS também basicamente um blade template é voce definir todos os estilos dentro de uma determinada view e depois voce ir apenas trocando o miolo ou o "conteudo" , como fazer isso?
+
+1. Criar a página de layout e as respectivas páginas que vão usar ela, uma página de layout fica assim:
+
+		<!DOCTYPE html>
+		<html>
+		<head>
+
+			//Variavel yield
+			<title> @yield('title') - page</title>
+
+		</head>
+		<style type="text/css">
+			.header{
+				color: green;
+			}
+
+			.content{
+				color: blue;
+			}
+		</style>
+		<body>
+			<div class="header">
+				
+				//Nome da sessão que depois é chamada na página que vai usar
+				@section('header')
+				<h1>header is common</h1>
+				@show
+
+			</div>
+
+			<div class="content">
+
+				//Nome da sessão que depois é chamada na página que vai usar
+				@section('content')
+
+				@show //Metodo para mostrar na outra página
+			</div>
+
+		</body>
+		</html>
 
 
+2. Criar as devidas rotas para as views que vão utilizar o template
 
+3. Para estender a página de layout em outras se usa o metodo @extends, basta colocar na view que deseja que receba o conteudo da página de layout
 
+		@extends('layout')
 
+4. Para definir o valor do campo @yield se usa:
 
+		@section('title','Home') //1 parametro Nome da variavel do yield, 2 parametro valor 
 
+5. Para usar o 'layout' mas apenas mudar o conteúdo dele se usa:
 
+		@section('content')
+			"Aqui dentro vai o conteúdo que deseja"
+		@endsection
 
+6. Para usar o 'layout' e alterar um conteudo que já existe dentro do 'layout' se usa:
 
+		@section('header')
 
+			@parent // Exibe o header common original
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			Dessa forma altera o "header common"
+		
+		@endsection
 
 
 
