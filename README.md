@@ -153,8 +153,22 @@ Para exibir pelo controller
 
 Como passar dados do controller para a view?
 
-	Routes::('sample','Users@sample',[name]);
+	//Dentro do controller devemos criar um metodo que faça isso algo parecido com
+	function sample()
+	{
+		return view('sample',['name'=>'Raziel M.']);
+	}
 
+	//E dentro da view devemos exibir a variavel, essa variavel tem escopo global, dessa forma irá exibir o nome 'Raziel M. vindo do controller'
+	<h1>sample page {{$name}} </h1>
+
+	//Se eu quiser também consigo modificar essa variavel passando o valor da variavel pela rota, basta adicionar um terceiro valor na função
+	Route::view('sample','sample',['name'=>'igor']);
+
+Chamando uma view que está em outro diretorio para isso usamos '.' no primeiro parametro para mostrar onde esta o arquivo ficando assim
+
+	//Chamando uma view que esta em outro diretorio
+	Route::view('nav.sample','sample',['name'=>'igor']);
 
 ### Visualização (Views - Components)
 
@@ -166,23 +180,218 @@ Como criar componentes?
 
 	php artisan make:components Header
 
-## Formulários
+Após a criação do componente a primeira parte vai para a pasta "app/view/components" que é onde esta a classe do componente que é onde configuramos ele. Também temos uma página de html em branco que vai para a pasta "resources/views/components" onde fazemos o front-end
+
+Como usar componentes?
+
+1. Criar o componente
+2. Criar a view onde deseja utilizar ele
+3. Criar uma rota para a view
+4. Dentro da view colocar a tag do componente ficando assim?
+
+		<x-nomedocomponente />
+
+Com  isso o componente já vai aparecer dentro da view.
+
+Como passar dados para o componente? Dentro da tag dele deve adicionar um atributo, no caso será o title
+
+	<x-header title="sample page"  />
+
+Dentro da classe dele criar uma propriedade publica e depois passar o parametro para o construtor, assim sempre que for reutilizar em outra view pode-se alterar o valor de "title" que o valor ficara diferente independente da view que utilize, ficando assim no construtor:
+
+	    public $title;
+	    public function __construct($title)
+	    {
+	        $this->title=$title;        
+	    }
+
+E como passar o valor direto da rota? É a mesma lógica de como se tivesse exibindo direto a váriavel ficando assim no componente:
+
+	<x-header title="sample page"  :name="igor"/>
+
+no construtor:
+
+	    public $title;
+	    public $name;
+	    public function __construct($title, $name)
+	    {
+	        $this->title=$title;
+	       	$this->title=$name;           
+	    }
+
+nas rotas:
+
+	Route::view('sample','sample',['name'=>'igor']);
+
+Assim exibirá o dado que vem da rota na view do componente.
+
+## Metodos HTTP e formulários
+
+Os metodos HTTP são todos os tipos de requisição que temos na internet, POST vai junto com os cabeçalhos do header de requisições sendo apenas descriptografado no servidor, já GET é mandado diretamente pela URL como parametro de query e sendo visivél para o usuario. Dentro do laravel conseguimos ver informações do header usando alguns metodos como:
+
+	echo $req->path(); //retorna o caminho da URL
+	echo $req->method(); //retorna se é post ou get
 
 Como criar formulários no laravel?
 
-### Metodos HTTP
+1. Se deve criar um formulário na view, nesse formulário a action dele deve ir para o controller que irá tratar dele, e definir o metodo dele (POST ou GET)
 
-Os metodos HTTP são todos os tipos de requisição que temos na internet
+2. Na criação do controller deve ser um controller do tipo request, ficando algo assim dependendo do metodo que for utilizar e o que quer que aconteça com os dados vindos do seu form:
 
-### Metodos HTTP (HTTP Client "guzzlehttp")
+		function account(Request $req)
+	    {
 
-Fazer requisições de API em json
+	    	// Pegando todos os input do formulario quando via post
+	    	return $req->input();
 
-### Validação de formulários
+	    	// Pegando todos os input do formulario quando via post e validando eles
+	    	return $req->validate([
+	    		'email' => 'required | min: 3 | max: 10',
+	    		'password' => 'required | email'
+	    	]);
 
-para validar usamos o metodo validate
+	    	// Caso queira apenas um campo do formulario quando via post
+	    	return $req->input('email');
 
-## Template usando blade
+	    	// Pegando dados do form quando via get
+	    	return $req->query();
+
+	    }   
+
+3. Depois se deve criar uma rota de visualização desse formulário
+4. Em seguida uma rota de envio de dados sendo algo assim:
+
+		//Mandando via post, lembrando que a action do form tem que bater com o nome da rota daqui
+		Route::post('userscontroller','UsersController@account');
+
+		//Mandando via get, lembrando que a action do form tem que bater com o nome da rota daqui
+		Route::get('userscontroller','UsersController@account');
+
+
+5. Em seguida adicionar o csrf senão irá dar página expirada para isso dentro do form adicionar
+
+			{{@csrf_field()}}
+
+
+6. Metodos HTTP (HTTP Client "guzzlehttp") nova feature
+
+Fazer requisições de API em json:
+
+	//Usando o guzzlehttp para fazer requisições de API
+	use Illuminate\Support\Facades\Http;
+
+	$resp = Http::get('https://viacep.com.br/ws/17054050/json/');
+
+	// Para enviar dados para a API
+	$resp = Http::post('https://viacep.com.br/ws/17054050/json/', ['name'=>'raziel teste']);
+
+	//Declara uma variavel com a resposta do metodo
+	dd($resp->body());
+
+7. Validação de formulários
+
+Para validar usamos o metodo validate dentro da função de request, o metodo validate tem diversos parametro para ajudar a definiar o que queremos de fato validar, dentro da função de request escreva algo parecido com isso dependendo do que deseja:
+
+		function account(Request $req)
+	    {
+
+	    	// Pegando todos os input do formulario quando via post e validando eles
+	    	return $req->validate([
+	    		'email' => 'required | min: 3 | max: 10',
+	    		'password' => 'required | email'
+	    	]);
+
+	    } 
+
+No HTML digite a variavel global:
+
+	$errors->any();
+
+Para validar em forma de lista:
+
+	@if($errors->any())
+	<div>
+		<ul>
+			@foreach($errors->all() as $err)
+			<li>{{$err}}</li>
+			@endforeach
+		</ul>
+	</div> 
+	@endif
+
+## Blade template
+
+O que são blade template? São páginas providas pelo Laravel para poder escrever PHP, até se pode utilizar a sintaxe do php comum mas elas são substituidas por '@' e '{{}}'
+
+	@ = usado para escrever condicionais de lógica, repeticação chamar metodos etc...
+
+	{{}} = Usado para exibir variaveis
+
+Como criar uma página blade?
+
+1. Criar o arquivo em 'resources/views' nomedapagina.blade.php
+2. Criar uma rota ou um controller que exiba essa view
+
+		//via controller
+		function index()
+		{
+			return view('nomedapagina');
+		}
+
+		Route::get('nomedapagina','nomeDoController@index');
+
+		//via rota
+		view('nomedapagina','nomedoparametrodeurl');
+
+Como exibir variaveis em uma página blade?
+
+1. Para exibir variaveis na pagina blade dentro do controller definir o que quer que seja exibido:
+
+		function index()
+		{
+			$QueroExibir = ['name'=>'Raziel M.'];
+			return view('nomedapagina','['name' => '$QueroExibir' ]');
+		}
+
+2. Dentro do blade chamar a variavel:
+
+		{{$QueroExibir}}
+
+Como fazer condicionais?
+
+	@if($data['name'] == 'Raziel M.')
+		<h1>To cansado</h1>
+	@else
+		<h2>mudou de pessoa</h2>
+	@endif
+
+Como fazer for each?
+
+	@foreach ($data as $key => $item)
+		<h3>{{$item}}</h3>
+		<h2>{{$key}} : {{$item}}</h2>
+	@endforeach
+
+Como fazer for?
+
+	@for($i=0; $i<10; $i++)
+		<h1>o valor é : {{$i}}</h1>
+	@endfor
+
+Usando CSRF token e PUT:
+
+		{{@csrf_field()}}
+		@method('PUT');
+
+Usando include:
+
+		@include('welcome');
+
+### Blade template layout
+
+
+
+
 
 
 

@@ -63,7 +63,7 @@ Route::get('/', function () {
 // Route::get('users','Users@sample');
 
 //Setando o valor da variavel {{$name}} que esta na view atraves da rota
-// Route::view('sample','sample',['name'=>'igor']);
+Route::view('sample','sample',['name'=>'igor']);
 
 //Chamando uma view que esta em outro diretorio
 // Route::view('nav.sample','sample',['name'=>'igor']);
@@ -80,10 +80,10 @@ Route::get('/', function () {
 // Route::view('userview', 'user');
 
 //Mandando via post, lembrando que a action do form tem que bater com o nome da rota daqui
-//Route::post('userscontroller','UsersController@account');
+Route::post('userscontroller','UsersController@account');
 
 //Mandando via get, lembrando que altera o metodo do form e do controler
-Route::post('userscontroller','UsersController@account');
+// Route::get('userscontroller','UsersController@account');
 
 //Retornando a view que contém o template de blade
 Route::get('userview', 'UsersController@index');
