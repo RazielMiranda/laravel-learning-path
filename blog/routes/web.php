@@ -88,8 +88,7 @@ Route::get('/', function () {
 //Retornando a view que contém o template de blade
 // Route::get('userview', 'UsersController@index');
 
-Route::view('home','home');
-Route::view('profile','profile');
+Route::view('noaccess','noaccess');
 
 
 

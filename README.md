@@ -458,9 +458,23 @@ Reutilizar páginas de blade em outras páginas, com um layout padrão de CSS e 
 		
 		@endsection
 
+## Middleware
 
+O que são middleware?
 
+O Middleware é apenas um mecanismo de filtragem de requisição HTTP. Ou seja, ele permite ou barra determinados fluxos de requisição que entram na sua aplicação, baseado em regras definidas.
 
+Como criar um middleware?
+
+1. php artisan make:middleware "nomeDoMiddleware"
+
+Após criado se encontra em app/http/middleware
+
+2. Registrar ele no arquivo Kernel.php
+
+	    protected $middleware = [
+	    	//Registrar aqui junto dos outros
+	    ];
 
 
 
