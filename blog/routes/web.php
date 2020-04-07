@@ -88,12 +88,12 @@ Route::get('/', function () {
 //Retornando a view que contém o template de blade
 // Route::get('userview', 'UsersController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::view('profile','profile')->middleware('customRouteAuth');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::view('profile','profile')->middleware('customRouteAuth');
 
-Route::view('noaccess','noaccess');
+// Route::view('noaccess','noaccess');
 
 // Route::group(['middleware' => ['customAuth']], function(){
 // 	Route::get('/', function () {
@@ -103,7 +103,7 @@ Route::view('noaccess','noaccess');
 // });
 
 
-
+Route::get('profile','Profiles@list');
 
 
 

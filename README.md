@@ -545,7 +545,39 @@ Middleware em rotas:
 	Route::view('profile','profile')->middleware('customRouteAuth');
 
 
-## CSRF TOKEN
+Middleware CSRF Token:
+
+Ir até a pasta middleware, e no arquivo "VerifyCsrfToken.php" fazer da seguinte forma:
+
+    protected $except = [
+        '*';
+    ];
+
+Assim vai liberar CSRF para todas as URL de formulário ou pode-se usar o @csrf no form direto.
+
+## Fazer requisições de API
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
