@@ -470,11 +470,86 @@ Como criar um middleware?
 
 Após criado se encontra em app/http/middleware
 
-2. Registrar ele no arquivo Kernel.php
+Existem tres grupos de middleware são eles:
 
-	    protected $middleware = [
-	    	//Registrar aqui junto dos outros
+Global = Fica registrado dentro do grupo global no kernel, e aplica direto no fluxo de requisição de qualquer parte do sistema de qualquer requisição.
+
+		protected $middleware = [
+
+	    	//Registrar middleware global
+        	\App\Http\Middleware\CheckAge::class,
+
 	    ];
+
+Group = Fica registrado um grupo de middleware sendo possível depois "agrupar" diversas rotas dentro do metodo deles e fazendo cada rota passar por mais de um middleware.
+
+	    protected $middlewareGroups = [
+
+		    //Registrar middleware em grupo
+	        'customAuth' => [
+	             \App\Http\Middleware\CheckAge::class,
+	        ]
+
+	    ];
+
+Routes = Fica registrado junto do grupo de middlewares de rotas, depois sendo possivel ser chamado via metodo por uma rota especifica ou uma chamada por vez, diferente do grupo que engloba diversas dentro dele.
+
+	    protected $routeMiddleware = [
+
+	    		//Registrar middleware em rotas
+	            'customRouteAuth' => \App\Http\Middleware\CheckAge::class,
+
+	    ];
+
+2. Registrar ele no arquivo Kernel.php dependendo do qual tipo de middleware que quer
+
+3. Criar a lógica do seu middleware no respectivo arquivo dele um exemplo de lógica que pega o parametro age via get e libera as páginas somente se a pessoa ter mais de 20 anos, do contrário faz um redirect para uma página de sem acesso, dentro da classe do middleware se encontra o metodo de requisição é dentro dele que escrevemos as condicionais:
+
+	    public function handle($request, Closure $next)
+	    {
+	        if ($request->age && $request->age<20)
+	        {
+	            return redirect('noaccess');
+	        }
+	        return $next($request);
+	    }
+
+4. Depois disso tudo se resume nas rotas e dependendo de qual tipo de middleware voce usou cada um vai ter uma implementação diferente
+
+Middleware global:
+
+Como dito anteriormente pega globalmente não sendo necessário registrar nenhuma rota mas para testar use
+
+	http://127.0.0.1:8000/?age=12
+
+Deve jogar direto para a página de redirect
+
+Middleware em grupo:
+
+	//Aqui chamamos a rota do grupo de middleware
+	Route::group(['middleware' => ['customAuth']], function(){
+
+		//Essa é a view que será liberada caso retorne true na lógica do middleware
+	 	Route::get('/', function () {
+	 	    return view('welcome');
+
+	 	//Como estamos trabalhando com um grupo, podemos adicionar mais uma rota que nela também
+	 	será aplicado o middleware
+	 	Route::view('profile','profile');
+
+	});
+
+Middleware em rotas:
+
+	//Assim aplicamos o middleware direto na rota
+	Route::view('profile','profile')->middleware('customRouteAuth');
+
+
+## CSRF TOKEN
+
+
+
+
 
 
 

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Rota basica
+// Rota basica
 Route::get('/', function () {
     return view('welcome');
 });
@@ -88,8 +88,19 @@ Route::get('/', function () {
 //Retornando a view que contém o template de blade
 // Route::get('userview', 'UsersController@index');
 
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::view('profile','profile')->middleware('customRouteAuth');
+
 Route::view('noaccess','noaccess');
 
+// Route::group(['middleware' => ['customAuth']], function(){
+// 	Route::get('/', function () {
+// 	    return view('welcome');
+// 	});
+// 	Route::view('profile','profile');
+// });
 
 
 
