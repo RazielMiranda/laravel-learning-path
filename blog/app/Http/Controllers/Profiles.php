@@ -12,7 +12,9 @@ class Profiles extends Controller
     
 	function list()
 	{
-		return Http::get('https://jsonplaceholder.typicode.com/posts')->body();
+		$data = Http::get('https://jsonplaceholder.typicode.com/posts')->json();
+
+		return view('profile',['data'=>$data]);
 	}
 
 }

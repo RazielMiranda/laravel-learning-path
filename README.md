@@ -557,23 +557,61 @@ Assim vai liberar CSRF para todas as URL de formulário ou pode-se usar o @csrf 
 
 ## Fazer requisições de API
 
+Com o Laravel conseguimos fazer requisições API usando o metodo Http do pacote guzzle, lembrando que se for utilizar localhost com o wamp pode dar esse problema:
+
+https://stackoverflow.com/questions/29822686/curl-error-60-ssl-certificate-unable-to-get-local-issuer-certificate
+
+Como fazer 'fetch' ou consumir uma API?
+
+1. Fazer o controller que deve ser algo como:
+
+Lembrando que antes de construir o controller tem que adicionar o pacote
+
+		use Illuminate\Support\Facades\Http;
 
 
+Bem dito isso o controller fica assim
 
+		function list()
+		{
+			return Http::get('https://jsonplaceholder.typicode.com/posts')->body();
+		}
 
+Com isso já conseguimos acessar a API em formato JSON mas tudo bagunçado e fora de um array.
 
+2. Criar uma rota para o controller do tipo get.
 
+3. Melhorar a visualização da API
 
+Para isso vamos trocar o  metodo no controller de body() para json() dessa forma salva a API dentro de um array sendo mais fácil para manipular 
 
+		function list()
+		{
+			return Http::get('https://jsonplaceholder.typicode.com/posts')->json();
+		}
 
+após trocar o metodo para json devemos retornar os dados para a view que desejamos, ficando algo como:
 
+		function list()
+		{
+			$data = return Http::get('https://jsonplaceholder.typicode.com/posts')->json();
 
+			return view('profile',['data'=>$data])
+		}
 
+A view deve retornar limpa e não mais "suja" de json, para acessar os dados na view podemos usar print_t para testar, pois mesmo assim fica "suja":
 
+		{{print_r($data)}}
 
+Para fazer de uma forma mais bonita fazemos, com for each assim podemos selecionar o que queremos que seja exibido
 
+		<ul>
+		@foreach($data as $item)
 
+		<li>{{$item['title']}}</li>
 
+		@endforeach
+		</ul>
 
 
 
