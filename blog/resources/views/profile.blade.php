@@ -6,10 +6,11 @@
 	
 	@parent
 	não é mais o header common
+	<a href="logout">sair</a>
 @endsection
 @section('content')
 
-Lorem ipsum dolor sit amet,  id est laborum.
+Lorem ipsum dolor sit amet, id est laborum.
 <ul>
 @foreach($data as $item)
 
@@ -19,3 +20,5 @@ Lorem ipsum dolor sit amet,  id est laborum.
 </ul>
 @endsection
 
+<h1>{{session('sessionData')['user']}}</h1>
+<h1>{{session('sessionData')['password']}}</h1>

@@ -613,17 +613,49 @@ Para fazer de uma forma mais bonita fazemos, com for each assim podemos selecion
 		@endforeach
 		</ul>
 
+## Sessões
 
+O que são sessões?
 
+Sessões em PHP são variaveis a nivel super global que voce consegue armazenar informações de usuario dentro dela de forma que também possam ser acessada de qualquer parte do codigo.
 
+Como trabalhar com sessões dentro do Laravel?
 
+1. Fazer uma view com formulário
 
+2. Fazer uma rota para essa view
 
+3. Fazer um controller, e salvar os dados na sessão:
 
+		function index(Request $req)
+		{
+			//Salvando os dados da sessão na variavel $req que vieram dos inputs da página
+			//e salvando na chave sessionData, depois retorna para a pagina profile
 
+			$req->session()->put('sessionData', $req->input());
+			return redirect('profile');
+		}
 
+Para exibir os dados na view profile usamos:
 
+		<h1>{{session('sessionData')['user']}}</h1>
+		<h1>{{session('sessionData')['password']}}</h1>
 
+4. Fazer a funcionalidade de logout:
 
+		Route::get('profile/','Profiles@list', function(){
+			if (!session()->has('sessionData')) {
+				return redirect('login');
+			}
+			return view('profile');
+		});
 
+		Route::get('/logout', function(){
+			session()->forget('sessionData');
+			return redirect('login');
+		});
+
+Na view:
+
+		<a href="logout">sair</a>
 
