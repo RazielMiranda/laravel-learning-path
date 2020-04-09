@@ -118,9 +118,11 @@ Route::get('/logout', function(){
 Route::group(['middleware' => ['customAuth']], function(){
 	Route::view('profile','profile');
 	Route::get('profile','Profiles@list');
+	Route::get('profile','Profiles@db');
 	Route::get('/', function () {
 	    return view('welcome');
 	});
 });
 Route::view('task','task');
 Route::post('task','Task@index');
+Route::post('task','Profiles@store');

@@ -753,12 +753,61 @@ Na view aparecerá "welcome to profile page"
 
 6. Pegar o parametro pela url assim o usuario pode escolher a lingua
 
- Route::get('/profile/{lang}', function ($lang) {
- 	 App::setlocale($lang);
-     return view('profile');
- });
+		 Route::get('/profile/{lang}', function ($lang) {
+		 	 App::setlocale($lang);
+		     return view('profile');
+		 });
 
+## Upload de arquivos
 
+1. Fazer um form com do tipo upload ficando como:
+
+		<form action="task" method="post"
+		enctype="multipart/form-data">
+			<input type="file" name="img">
+			<button type="submit">enviar</button>
+				{{@csrf_field()}}
+		</form>
+
+2. Criar um controller do tipo upload ficando algo como:
+
+		function store(Request $req)
+		{
+			$path = $req->file('img')->store('avatars');
+			return ['path' => $path, 'upload' => 'success'];
+		}
+
+3. Fazer uma rota pro controller
+
+		Route::post('task','Profiles@store');
+
+4. após o post será exibido o path onde a imagem foi guardada que no caso se encontra em storage/app/avatars
+
+## Banco de dados: conexão
+
+1. Configurar o arquivo .env (arquivo de configuração de ambiente) nessa parte
+
+		DB_CONNECTION=mysql
+		DB_HOST=127.0.0.1
+		DB_PORT=3306
+		DB_DATABASE=youtube
+		DB_USERNAME=root
+		DB_PASSWORD=
+
+2. Criar o controller para o select de teste algo como
+
+		function db()
+		{
+			return DB::select('select * from user1');
+		}
+
+E também colocar o pacote
+
+use Illuminate\Support\Facades\DB;
+
+3. Criar em seguida a rota.
+
+Deverá ser exibido o que existe nessa tabela em formato json
 
 
 
