@@ -692,3 +692,77 @@ O que são?
 
 Tem o mesmo conceito das outras a diferença é que funciona apenas uma vez.
 
+Como fazer?
+
+1. Criar um form
+
+2. Criar uma rota para essa view
+
+3. Criar um controller para essa sessão, ficando algo como:
+
+		function index(Request $req)
+		{
+			$req->session()->flash('status', 'deu certo!');
+			return redirect('task');
+		}
+
+4. Chamar o controller via post
+
+5. exibir a sessão na view algo como
+
+		<h1>{{session('status')}}</h1>
+
+O que vai acontecer basicamente é que invez da sessão continuar ali, na verdade ela vai sumir quando der refresh
+
+como uma mensagem de aviso que deu certo!
+
+### Localização
+
+É quando voce consegue mudar a localidade da sua aplicação, em questão de pais, como esta rodando no brasil e depois na india.
+
+Como fazer?
+
+1. criar uma view
+
+2. criar um arquivo com o nome da lingua dentro do diretorio resources/lang e colocar o nome do diretorio da lingua que quer
+
+3. escrever assim dentro do arquivo da lingua ficando assim
+
+		<?php 
+		return [
+			'welcome' => 'welcome to profile page',
+			'home' => 'Home',
+			'settings' => 'Settings'
+		]
+		?>
+
+4. Para exibir na view usamos
+
+		<h1>{{__('profile.welcome')}}</h1>
+
+Na view aparecerá "welcome to profile page"
+
+5. Dentro do diretorio config temos o arquivo app e temos as linhas
+
+		// Essa linha define o diretorio e lingua default do sistema
+	    'locale' => 'en',
+
+	    // Essa linha define qual é a lingua se o parametro que o usuario
+	    passar na url nao existir
+	    'fallback_locale' => 'en',
+
+6. Pegar o parametro pela url assim o usuario pode escolher a lingua
+
+ Route::get('/profile/{lang}', function ($lang) {
+ 	 App::setlocale($lang);
+     return view('profile');
+ });
+
+
+
+
+
+
+
+
+

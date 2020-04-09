@@ -122,4 +122,5 @@ Route::group(['middleware' => ['customAuth']], function(){
 	    return view('welcome');
 	});
 });
-
+Route::view('task','task');
+Route::post('task','Task@index');

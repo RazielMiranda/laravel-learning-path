@@ -22,3 +22,4 @@ Lorem ipsum dolor sit amet, id est laborum.
 
 <h1>{{session('sessionData')['user']}}</h1>
 <h1>{{session('sessionData')['password']}}</h1>
+<h1>{{__('profile.welcome')}}</h1>
