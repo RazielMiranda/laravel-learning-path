@@ -26,9 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rota basica
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 //Rota editada
 // Route::get('/sample', function () {
@@ -109,20 +109,21 @@ use Illuminate\Support\Facades\Route;
 // 	return view('profile');
 // });
 
-Route::view('login','login');
-Route::post('login','Login@index');
-Route::get('/logout', function(){
-	session()->forget('sessionData');
-	return redirect('login');
-});
-Route::group(['middleware' => ['customAuth']], function(){
-	Route::view('profile','profile');
-	Route::get('profile','Profiles@list');
-	Route::get('profile','Profiles@db');
-	Route::get('/', function () {
-	    return view('welcome');
-	});
-});
-Route::view('task','task');
-Route::post('task','Task@index');
-Route::post('task','Profiles@store');
+// Route::view('login','login');
+// Route::post('login','Login@index');
+// Route::get('/logout', function(){
+// 	session()->forget('sessionData');
+// 	return redirect('login');
+// });
+// Route::group(['middleware' => ['customAuth']], function(){
+// 	Route::view('profile','profile');
+// 	Route::get('profile','Profiles@list');
+// 	Route::get('profile','Profiles@db');
+// 	Route::get('/', function () {
+// 	    return view('welcome');
+// 	});
+// });
+// Route::view('task','task');
+// Route::post('task','Task@index');
+// Route::post('task','Profiles@store');
+Route::resource('upload','ImageController');

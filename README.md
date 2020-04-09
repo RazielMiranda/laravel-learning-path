@@ -839,14 +839,68 @@ depois de instalado editar o arquivo "config/app.php" no array $providers
 
 e no array $aliases
 
-		'Image' => Intervention\Image\Facades\Image::class
+		'Image' => Intervention\Image\Facades\Image::class,
 
-caso queira um arquivo de configuração da engine da class
+caso queira um arquivo d	e configuração da engine da class
 
 		php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
 
 vai para o dir "config/image.php"
 
+criar storage link em /
+
+		php artisan storage:link
+
+Criar um controller com o comando
+
+		php artisan make:controller ImageController --resource
+
+Após o controller criado é necessario criar uma view com o formulario
+
+	<form action="{{ url('upload') }}" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="exampleInputFile">File input</label>
+			<input type="file" name="profile_image" id="exampleInputFile">
+		</div>
+		{{ csrf_field() }}
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+
+Criando o controller assim já vem com todos os metodos necessários para usar, no metodo store escreva algo como:
+
+Dentro do controller colocar o "use Image"
 
 
+		public function store(Request $request)
+		{
+			if($request->hasFile('profile_image')) {
+				//get filename with extension
+				$filenamewithextension = $request->file('profile_image')->getClientOriginalName();
+		
+				//get filename without extension
+				$filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+		
+				//get file extension
+				$extension = $request->file('profile_image')->getClientOriginalExtension();
+		
+				//filename to store
+				$filenametostore = $filename.'_'.time().'.'.$extension;
+		
+				//Upload File
+				$request->file('profile_image')->storeAs('public/profile_images', $filenametostore);
+		
+				//Resize image here
+				$thumbnailpath = public_path('storage/profile_images/'.$filenametostore);
+				$img = Image::make($thumbnailpath)->resize(400, 150, function($constraint) {
+					$constraint->aspectRatio();
+				});
+				$img->save($thumbnailpath);
+		
+				return redirect('upload')->with('success', "Image uploaded successfully.");
+			}
+		}
 
+Dessa forma o upload será feito é a imagem cortada
+
+//Aqui força o crop pra 100,100
+$img = Image::make($thumbnailpath)->resize(100, 100)->save($thumbnailpath);
