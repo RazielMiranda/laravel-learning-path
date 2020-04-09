@@ -810,7 +810,42 @@ use Illuminate\Support\Facades\DB;
 Deverá ser exibido o que existe nessa tabela em formato json
 
 
+## Fazendo teste com a biblioteca http://image.intervention.io/
 
+Essa biblioteca tem o objetivo de fazer com que upload de imagens
+passem por um redimensionamento.
+
+Como instalar?
+
+necessário ter antes
+
+		PHP >= 5.4
+		Fileinfo Extension
+
+e uma das bibliotecas
+
+		GD Library (>=2.0) 
+		ou
+		Imagick PHP extension (>=6.5.7)
+
+no composer
+
+		composer require intervention/image
+
+
+depois de instalado editar o arquivo "config/app.php" no array $providers
+
+		Intervention\Image\ImageServiceProvider::class,
+
+e no array $aliases
+
+		'Image' => Intervention\Image\Facades\Image::class
+
+caso queira um arquivo de configuração da engine da class
+
+		php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+
+vai para o dir "config/image.php"
 
 
 
