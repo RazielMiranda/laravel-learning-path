@@ -26,9 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rota basica
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 //Rota editada
 // Route::get('/sample', function () {
@@ -103,18 +103,23 @@ Route::get('/', function () {
 // });
 
 
+
+
+// Route::get('profile/','Profiles@list', function(){
+// 	return view('profile');
+// });
+
 Route::view('login','login');
 Route::post('login','Login@index');
-// Route::view('profile','profile');
-
-Route::get('profile/','Profiles@list', function(){
-	if (!session()->has('sessionData')) {
-		return redirect('login');
-	}
-	return view('profile');
-});
-
 Route::get('/logout', function(){
 	session()->forget('sessionData');
 	return redirect('login');
 });
+Route::group(['middleware' => ['customAuth']], function(){
+	Route::view('profile','profile');
+	Route::get('profile','Profiles@list');
+	Route::get('/', function () {
+	    return view('welcome');
+	});
+});
+

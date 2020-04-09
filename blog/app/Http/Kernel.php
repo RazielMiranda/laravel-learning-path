@@ -44,9 +44,10 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        // 'customAuth' => [
-        //     \App\Http\Middleware\CheckAge::class,
-        // ]
+        'customAuth' => [
+            \App\Http\Middleware\CheckAge::class,
+            \App\Http\Middleware\CustomAuth::class,
+        ]
     
     ];
 

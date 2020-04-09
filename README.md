@@ -659,3 +659,36 @@ Na view:
 
 		<a href="logout">sair</a>
 
+### Sessões com middleware
+
+Como fazer?
+
+1. Criar o middleware
+
+2. Passar a lógica de login pra ele
+
+3. Ajustar ele na rota ficando mais ou menos assim
+
+		Route::view('login','login');
+		Route::post('login','Login@index');
+		Route::get('/logout', function(){
+			session()->forget('sessionData');
+			return redirect('login');
+		});
+
+		//Tudo que tiver aqui dentro so pode ser acesssado
+		se tiver feito login
+		Route::group(['middleware' => ['customAuth']], function(){
+			Route::view('profile','profile');
+			Route::get('profile','Profiles@list');
+			Route::get('/', function () {
+			    return view('welcome');
+			});
+		});
+
+### Sessões flash
+
+O que são?
+
+Tem o mesmo conceito das outras a diferença é que funciona apenas uma vez.
+
