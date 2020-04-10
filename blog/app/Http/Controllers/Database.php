@@ -65,9 +65,22 @@ class Database extends Controller
 	        // );
 	//}
 
-	function selectJoin()
+	// function selectJoin()
+	// {
+	// 	$data = DB::table('user1')
+	// 	->select('user1.nome','produtos.quantidade')
+	// 	->join('produtos','user1.id','produtos.id_user')
+	// 	//->leftjoin('produtos','user1.id','produtos.id_user')
+	// 	//->rightjoin('produtos','user1.id','produtos.id_user')
+	// 	->where('nome','igor pereira')
+	// 	->get();
+	// 	echo "<pre>";
+	// 	print_r($data);
+	// }
+
+	function selectView()
 	{
-		
+		//return DB::select('select * from user1');
 	}
 
 }

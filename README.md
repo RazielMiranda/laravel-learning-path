@@ -898,4 +898,54 @@ class Database extends Controller
 
 ## Banco de dados: Joins
 
+	function selectJoin()
+	{
+		$data = DB::table('user1')
+		->select('user1.nome','produtos.quantidade')
+		->join('produtos','user1.id','produtos.id_user')
+		//->leftjoin('produtos','user1.id','produtos.id_user')
+		//->rightjoin('produtos','user1.id','produtos.id_user')
+		->where('nome','igor pereira')
+		->get();
+		echo "<pre>";
+		print_r($data);
+	}
+
+## Banco de dados: Listando na view
+
+no controller do banco
+
+	function selectView()
+	{
+		$data = DB::select('select * from user1');
+		return view('home', ['data' => $data]);
+	}
+
+chama na rota e na view exibe
+
+	@foreach($data as $item)
+	<li>{{$item->nome}}</li>
+	@endforeach
+
+## Banco de dados: Listando na view com paginação
+
+	function selectView()
+	{
+		$data = DB::table('user1')->paginate(2);
+		return view('home', ['data' => $data]);
+	}
+
+na view
+
+	{{$data->links()}}
+
+## Modelos
+
+O que é models?
+
+Models são as regras de negocio do banco de dados, v
+
+Como fazer models?
+
+
 

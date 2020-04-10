@@ -122,7 +122,8 @@ Route::group(['middleware' => ['customAuth']], function(){
 	// Route::get('home','Database@delete');
 	// Route::get('home','Database@insert');
 	// Route::get('home','Database@update');
-	Route::get('home','Database@selectJoin');
+	// Route::get('home','Database@selectJoin');
+	Route::get('home','Database@selectView');
 	Route::get('/', function () {
 	    return view('welcome');
 	});

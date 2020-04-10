@@ -12,3 +12,14 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
 
 @endsection
+<table>
+
+@foreach($data as $item)
+<tr>
+<td>{{$item->id}}</td>
+<td>{{$item->nome}}</td>
+</tr>
+
+@endforeach
+</table>
+{{$data->links()}}
