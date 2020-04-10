@@ -25,9 +25,6 @@ class Profiles extends Controller
 		return ['path' => $path, 'upload' => 'success'];
 	}
 
-	function db()
-	{
-		return DB::select('select * from user1');
-	}
+
 
 }

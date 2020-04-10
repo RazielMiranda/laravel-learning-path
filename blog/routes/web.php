@@ -118,7 +118,11 @@ Route::get('/logout', function(){
 Route::group(['middleware' => ['customAuth']], function(){
 	Route::view('profile','profile');
 	Route::get('profile','Profiles@list');
-	Route::get('profile','Profiles@db');
+	// Route::get('home','Database@select');
+	// Route::get('home','Database@delete');
+	// Route::get('home','Database@insert');
+	// Route::get('home','Database@update');
+	Route::get('home','Database@selectJoin');
 	Route::get('/', function () {
 	    return view('welcome');
 	});

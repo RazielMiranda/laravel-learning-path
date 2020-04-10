@@ -810,8 +810,92 @@ use Illuminate\Support\Facades\DB;
 Deverá ser exibido o que existe nessa tabela em formato json
 
 
+## Banco de dados: Montador de query
 
+É uma função provida pelo Laravel para te ajudar 
 
+Como pegar dados?
 
+1. Estar com o DB configurado
+
+2. Cria um controller, e adicionar a classe do db
+
+3. Uma rota para ele com get e no controller, assim se repete com todas as operações ficando algo como:
+
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
+class Database extends Controller
+{
+	function select()
+	{
+		//Select simples todos os dados
+		//return DB::select('select * from user1');
+
+		//Select em uma table  traz todos os dados
+		// return DB::table('user1')->get();
+
+		//Select com where
+		// return DB::table('user1')
+		// ->where('nome','raziel miranda')
+		// ->get();
+
+		//Contagem de registros na tabela
+		// $data = DB::table('user1')->count();
+
+		//Primeiro registro
+		// $data = DB::table('user1')->first();
+
+		//Procura o id pelo número dentro do metodo
+		// $data = DB::table('user1')->find(2);
+		//print r para ver os resultados
+		// print_r($data);
+	}
+
+	function delete()
+	{
+		//delete simples, sem o where apaga tudo
+		// $data = DB::table('user1')
+		// ->where('nome','raziel miranda')
+		// ->delete();
+		 //print_r($data);
+	}
+
+	function insert()
+	{
+			$insertRandom = time();
+			$data = DB::table('user1')
+			->insert(
+				[
+					'nome'=> $insertRandom,
+				]
+			);
+	
+			print_r($data);
+	}
+
+	//function update()
+	//{
+			// $data = DB::table('user1')
+			// ->where('id',2)
+			// ->update(
+			// 	[
+			// 		'nome'=> 'alterado pelo denvo!',
+			// 	]
+			// print_r($data);
+	        // );
+	//}
+
+}
+
+	Route::get('home','Database@select');
+	Route::get('home','Database@delete');
+	Route::get('home','Database@insert');
+	// Route::get('home','Database@update');
+
+## Banco de dados: Joins
 
 
