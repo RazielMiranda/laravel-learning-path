@@ -947,5 +947,45 @@ Models são as regras de negocio do banco de dados, v
 
 Como fazer models?
 
+		php artisan make:model Produtos
 
+vai para o diretorio app/
 
+Como usar models?
+
+no controller colocar o seguinte comando
+
+		return Produto::all();
+
+O nome da model tem que ser sempre no singular, e o do banco plural
+
+		model: Produto
+		table: produtos
+
+Se caso for outro nome a table pode colocar uma variavel com o nome correto
+essa variavel vai direto na model, por exemplo:
+
+	    protected $table = 'user1';
+
+## Modelos: Metodos
+
+	function selectView()
+	{
+		//Retorna todos os dados
+		//return Produto::all();
+
+		//Retorna com where
+		//return Produto::where('id', 5)->get();
+
+		//Retorna o campo id 6
+		//return Produto::find(6);
+
+		//Retorna metodos de contagem
+		//return Produto::max('id');
+		//return Produto::min('id');
+		//return Produto::sum('id');
+		//return Produto::avg('id');
+
+	}
+
+## Banco de dados: Inserindo dados no banco pela view

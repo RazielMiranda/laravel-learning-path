@@ -123,7 +123,11 @@ Route::group(['middleware' => ['customAuth']], function(){
 	// Route::get('home','Database@insert');
 	// Route::get('home','Database@update');
 	// Route::get('home','Database@selectJoin');
-	Route::get('home','Database@selectView');
+	// Route::get('home','Database@selectView');
+	// Route::get('home','Database@selectView');
+	Route::view('insert','insert');
+	Route::post('submit','Company@save');
+
 	Route::get('/', function () {
 	    return view('welcome');
 	});

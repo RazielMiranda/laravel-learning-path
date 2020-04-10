@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Produto;
 
 class Database extends Controller
 {
@@ -80,7 +81,22 @@ class Database extends Controller
 
 	function selectView()
 	{
-		//return DB::select('select * from user1');
+		//Retorna todos os dados
+		// return Produto::all();
+
+		//Retorna com where
+		//return Produto::where('id', 5)->get();
+
+		//Retorna com where
+		// return Produto::find(6);
+
+		//Retorna com where
+		//return Produto::max('id');
+
+		//return Produto::min('id');
+		//return Produto::sum('id');
+		// return Produto::avg('id');
+
 	}
 
 }
