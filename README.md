@@ -202,7 +202,7 @@ Dentro da classe dele criar uma propriedade publica e depois passar o parametro 
      public $title;
      public function __construct($title)
      {
-         $this->title=$title;        
+         $this->title=$title;
      }
 
 E como passar o valor direto da rota? É a mesma lógica de como se tivesse exibindo direto a váriavel ficando assim no componente:
@@ -216,7 +216,7 @@ no construtor:
      public function __construct($title, $name)
      {
          $this->title=$title;
-         $this->title=$name;           
+         $this->title=$name;
      }
 
 nas rotas:
@@ -256,7 +256,7 @@ Como criar formulários no laravel?
       // Pegando dados do form quando via get
       return $req->query();
 
-     }   
+     }
 
 3. Depois se deve criar uma rota de visualização desse formulário
 4. Em seguida uma rota de envio de dados sendo algo assim:
@@ -299,7 +299,7 @@ Para validar usamos o metodo validate dentro da função de request, o metodo va
        'password' => 'required | email'
       ]);
 
-     } 
+     }
 
 No HTML digite a variavel global:
 
@@ -314,7 +314,7 @@ Para validar em forma de lista:
    <li>{{$err}}</li>
    @endforeach
   </ul>
- </div> 
+ </div>
  @endif
 
 ## Blade template
@@ -410,7 +410,7 @@ Reutilizar páginas de blade em outras páginas, com um layout padrão de CSS e 
   </style>
   <body>
    <div class="header">
-    
+
     //Nome da sessão que depois é chamada na página que vai usar
     @section('header')
     <h1>header is common</h1>
@@ -437,7 +437,7 @@ Reutilizar páginas de blade em outras páginas, com um layout padrão de CSS e 
 
 4. Para definir o valor do campo @yield se usa:
 
-  @section('title','Home') //1 parametro Nome da variavel do yield, 2 parametro valor 
+  @section('title','Home') //1 parametro Nome da variavel do yield, 2 parametro valor
 
 5. Para usar o 'layout' mas apenas mudar o conteúdo dele se usa:
 
@@ -764,7 +764,9 @@ Na view aparecerá "welcome to profile page"
     {{@csrf_field()}}
   </form>
 
-2. Criar um controller do tipo upload ficando algo como:
+2. 
+
+Criar um controller do tipo upload ficando algo como:
 
   function store(Request $req)
   {
@@ -772,11 +774,15 @@ Na view aparecerá "welcome to profile page"
    return ['path' => $path, 'upload' => 'success'];
   }
 
-3. Fazer uma rota pro controller
+3. 
+
+Fazer uma rota pro controller
 
   Route::post('task','Profiles@store');
 
-4. após o post será exibido o path onde a imagem foi guardada que no caso se encontra em storage/app/avatars
+4. 
+
+após o post será exibido o path onde a imagem foi guardada que no caso se encontra em storage/app/avatars
 
 ## Banco de dados: conexão
 
@@ -984,28 +990,30 @@ essa variavel vai direto na model, por exemplo:
 
 ## Banco de dados: Inserindo dados no banco pela view
 
+1.
 
+Criar a view com o formularío
 
+2.
 
+Retornar a view
 
+3.
 
+Criar o controller e a chamada dele
 
+4.
 
+Fazer o model e chamar o model dentro do controle e importar o database também
 
+5.
 
+Escrever o código do update
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    function update(Request $req)
+    {
+        echo Produto::where('id', $req->iduser)
+        ->update(['nome_produto' => $req->nomeuser]);
+    }
 
 
