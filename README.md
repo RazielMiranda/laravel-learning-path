@@ -1096,4 +1096,36 @@ diferente se usa
 
     php artisan db:seed --class=NomeDoArquivo de seed
 
-Assim ai rodar o seed do outro arquivo
+Assim vai rodar o seed do outro arquivo
+
+
+## Banco de dados: Accessors
+
+O que são acessors?
+
+Quando você quer que os dados ja venham formatados pra voce a partir da model ou seja
+fica cuidando e fazendo modificações nos dados direto na model.
+
+Como criar acessores?
+
+1. Criar o controller
+
+2. Criar a model
+
+3. Criar as rotas
+
+4. Dentro da model:
+
+    //Faz a primeira letra dos valores do campo ficarem maior
+      public function getNomeProdutoAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    //Diminui todas as quantidas com menos 10
+    public function getQuantidadeAttribute($value)
+    {
+        return $value=($value - 10);
+    }
+
+## Banco de dados: Mutators
