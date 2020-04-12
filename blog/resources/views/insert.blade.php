@@ -10,14 +10,20 @@
         @csrf
     </form> --}}
 
-    <form action="submit" method="post">
+    {{-- <form action="submit" method="post">
         <h3>update</h3>
         <input type="text" placeholder="nome" name="nomeuser">
         <input type="number" placeholder="id user" name="iduser">
         <button input="submit">enviar</button>
         @csrf
-    </form>
+    </form> --}}
 
+    <form action="submit" method="post">
+        <h3>Delete</h3>
+        <input type="number" placeholder="id user" name="iduser">
+        <button input="submit">enviar</button>
+        @csrf
+    </form>
 
 </body>
 </html>

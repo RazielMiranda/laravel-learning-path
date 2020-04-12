@@ -127,7 +127,8 @@ Route::group(['middleware' => ['customAuth']], function(){
 	// Route::get('home','Database@selectView');
 	Route::view('insert','insert');
 	// Route::post('submit','Company@save');
-	Route::post('submit','Company@update');
+	// Route::post('submit','Company@update');
+	Route::post('submit','Company@delete');
 
 	Route::get('/', function () {
 	    return view('welcome');

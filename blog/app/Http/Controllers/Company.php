@@ -18,12 +18,25 @@ class Company extends Controller
     //     echo $produto->save();
     // }
 
-    function update(Request $req)
-    {   
+    // function update(Request $req)
+    // {   
 
-        echo Produto::where('id', $req->iduser)
-        ->update(['nome_produto' => $req->nomeuser]);
+    //     echo Produto::where('id', $req->iduser)
+    //     ->update(['nome_produto' => $req->nomeuser]);
         
-    }
+    //     //Outra forma de fazer update
+    //     $update = Produto::find($req->id);
+    //     $update->nome_produto=$req->nomeuser;
+    //     $update->save();
+    // }
+
+//    function delete(Request $req)
+//     {   
+//         $delete = Produto::find($req->iduser);
+//         echo $delete->delete();
+
+//         Assim se deleta um array todo
+//         Produtos::destroy(1,4);
+//     }
 
 }

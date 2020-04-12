@@ -806,7 +806,9 @@ E também colocar o pacote
 
 use Illuminate\Support\Facades\DB;
 
-3. Criar em seguida a rota.
+3. 
+
+Criar em seguida a rota.
 
 Deverá ser exibido o que existe nessa tabela em formato json
 
@@ -939,7 +941,7 @@ na view
 
  {{$data->links()}}
 
-## Modelos
+## Banco de dados: Models
 
 O que é models?
 
@@ -967,7 +969,7 @@ essa variavel vai direto na model, por exemplo:
 
      protected $table = 'user1';
 
-## Modelos: Metodos
+## Banco de dados: Metodos
 
  function selectView()
  {
@@ -988,7 +990,7 @@ essa variavel vai direto na model, por exemplo:
 
  }
 
-## Banco de dados: Inserindo dados no banco pela view
+## Banco de dados: Insert pela view
 
 1.
 
@@ -1008,12 +1010,90 @@ Fazer o model e chamar o model dentro do controle e importar o database também
 
 5.
 
-Escrever o código do update
+Escrever o código do insert
+
+    function save(Request $req)
+    {
+
+         // print_r($req->input());
+         $produto = new Produto;
+         $produto->quantidade = $req->quantidade;
+         $produto->nome_produto = $req->nome;
+         $produto->id_user = $req->id_user;
+
+         echo $produto->save();
+    }
+
+## Banco de dados: Update pela view
+
+Mesmo processo só muda o código
 
     function update(Request $req)
     {
+
         echo Produto::where('id', $req->iduser)
         ->update(['nome_produto' => $req->nomeuser]);
+
+        //Outra forma de fazer update
+        $update = Produto::find($req->id);
+        $update->nome_produto=$req->nomeuser;
+        $update->save();
     }
 
+## Banco de dados: Deletando pela view
 
+Mesmo processo só muda o código
+
+   function delete(Request $req)
+    {
+        $delete = Produto::find($req->iduser);
+        echo $delete->delete();
+
+        Assim se deleta um array todo
+        Produtos::destroy(1,4);
+    }
+
+## Banco de dados: Seeding de dados
+
+O que é seeding ou semeamento de dados?
+
+Vamos supor que voce tem uma database de produção e quer copiar os dados para uma de desenvolvimento
+é para isso que funciona o semeamento de dados.
+
+Como fazer seeding?
+
+Ir até o caminho database/seeding dentro do arquivo
+
+colocar o metodo que voce deseja que execute, no caso um insert observe
+
+    public function run()
+    {
+        // $this->call(UserSeeder::class);
+
+        DB::table('produtos')->insert([
+            'nome_produto' => 'teste sobre seeder',
+            'id_user' => '2',
+            'quantidade' => 20,
+        ]);
+    }
+
+em seguida rodar o comando
+
+    php artisan db:seed
+
+Tudo que colocou lá no seeder vai ser adicionado no banco de dados
+
+e como criar um novo arquivo de seeder?
+
+   php artisan make:seeder nome_do_arquivo
+
+Para aparecer é importante rodar o
+  
+    composer dump-autoload
+
+E ai o seed do novo arquivo está pronto para se usar, para chamar o seeder de um arquivo
+diferente se usa
+
+    php artisan db:seed --class=NomeDoArquivo de seed
+
+Assim ai rodar o seed do outro arquivo
