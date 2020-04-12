@@ -130,6 +130,7 @@ Route::group(['middleware' => ['customAuth']], function(){
 	// Route::post('submit','Company@update');
 	// Route::post('submit','Company@delete');
 	Route::get('acessor','Acessor@index');
+	Route::get('acessor','Acessor@index');
 
 	Route::get('/', function () {
 	    return view('welcome');

@@ -1129,3 +1129,34 @@ Como criar acessores?
     }
 
 ## Banco de dados: Mutators
+
+O que são modificadores?
+
+Quando voce quer salvar um dado no banco de dados mas modificado antes de entrar nele.
+
+Como fazer Mutators?
+
+1. Criar o controller
+
+2. Criar a model
+
+3. Criar as rotas
+
+4. No controller seria como um insert
+
+4. Dentro da model:
+
+    public function setNomeProdutoAttribute($value)
+    {
+        return $this->attributes['nome_produto']=ucfirst($value);
+    }
+
+Assim todos os salvos que forem ser salvos no banco de dados irão
+ter a primeira letra capitalizada.
+
+## Banco de dados: Relação 1 para 1
+
+
+
+
+
