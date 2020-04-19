@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\SampleMail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+    // return new SampleMail();
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/{item:status}', 'Binding@index');
+// Route::get('/{item:status}', 'Binding@index');

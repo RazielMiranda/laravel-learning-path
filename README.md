@@ -36,3 +36,19 @@ Já esta funcionando o pacote de Auth
     Route::get('/{item:status}', 'Binding@index');
 
 Funciona para passar escondido os parametros para o banco de dados.
+
+## Markdown Mail Template
+
+Criando email com template em markdown
+
+1. php artisan make:mail SampleMail --markdown=emails.SampleMail
+
+2. Vai criar os componentes de email em resources/views/emails
+
+3. Para saber mais: https://laravel.com/docs/7.x/mail#markdown-mailables
+
+## Laravel Sanctum
+
+https://www.youtube.com/watch?v=hayHnHx83eg&list=PL8p2I9GklV46twRyl207h5LcsdjB9S9B0&index=45
+
+https://github.com/anil-sidhu/laravel-sanctum
