@@ -1193,4 +1193,12 @@ Na tabela Companies vai uma FK de users
       return Users::find(2)->myCompany;
     }
 
+## Banco de dados: Relação 1 para N
+
+Mesma coisa que 1 para 1 somente muda o metodo do model que passa a ser:
+
+    return $this->hasMany('App\Companies','id_users','id');
+
+## Banco de dados: Relação N para N
+
 

@@ -45,4 +45,9 @@ class Company extends Controller
             return Users::find(2)->myCompany;
         }
 
+        function findMany()
+        {
+            return Users::find(1)->myCompany;
+        }
+
 }
