@@ -1,4 +1,4 @@
-# Implementando interface UI
+# Implementando Auth com interface ui
 
 1. Instalar pacote no laravel
 
@@ -19,3 +19,20 @@
     php artisan migrate
 
 Já esta funcionando o pacote de Auth
+
+## Route Model Binding
+
+1. Criar tabela, model, controller e rota
+
+2. Dentro do controller
+
+    function index(Product $item)
+    {
+        return $item->all();
+    }
+
+3.  Dentro da rota
+
+    Route::get('/{item:status}', 'Binding@index');
+
+Funciona para passar escondido os parametros para o banco de dados.
