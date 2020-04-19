@@ -1199,6 +1199,9 @@ Mesma coisa que 1 para 1 somente muda o metodo do model que passa a ser:
 
     return $this->hasMany('App\Companies','id_users','id');
 
-## Banco de dados: Relação N para N
+## Instalando pacote de User Interface e de AUTH
 
+1. Digitar no composer
 
+    composer require laravel/ui
+2. 
