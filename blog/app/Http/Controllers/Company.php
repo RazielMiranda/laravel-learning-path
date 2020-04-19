@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produto;
+use App\Users;
 
 class Company extends Controller
 {
@@ -38,5 +39,10 @@ class Company extends Controller
 //         Assim se deleta um array todo
 //         Produtos::destroy(1,4);
 //     }
+
+        function find()
+        {
+            return Users::find(2)->myCompany;
+        }
 
 }

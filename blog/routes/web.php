@@ -126,11 +126,12 @@ Route::group(['middleware' => ['customAuth']], function(){
 	// Route::get('home','Database@selectView');
 	// Route::get('home','Database@selectView');
 	Route::view('insert','insert');
+	Route::get('insert','Company@find');
 	// Route::post('submit','Company@save');
 	// Route::post('submit','Company@update');
 	// Route::post('submit','Company@delete');
-	Route::get('acessor','Acessor@index');
-	Route::get('acessor','Acessor@index');
+	// Route::get('acessor','Acessor@index');
+	// Route::get('acessor','Acessor@index');
 
 	Route::get('/', function () {
 	    return view('welcome');

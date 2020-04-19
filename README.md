@@ -1156,7 +1156,41 @@ ter a primeira letra capitalizada.
 
 ## Banco de dados: Relação 1 para 1
 
+Como fazer relações 1 para 1 no Laravel?
 
+As tabelas devem ter as relações já embutida nelas, exemplo de como fazer:
 
+1. Já ter o controller e a rota pronta
+
+2. Criar as models para as respectivas tabelas
+
+Exemplo tabelas: 
+
+Users (1) para (1) Companies
+
+Na tabela Companies vai uma FK de users
+
+3. No model da Users
+
+    function myCompany()
+    { 
+        //Retorna se existe um registro na tabela companies onde:
+        //O primeiro parametro é o nome do campo FK na outra tabela
+        //O segundo parametro é o nome do campo na propria tabela
+        //return $this->hasOne('App\Companies','id_users','id');
+
+        //Assim ele só verifica direto se existe algum id de users em companies
+        return $this->hasOne('App\Companies');
+    }
+
+4. No controller
+
+    //Esse metodo find serve para buscar um número de ID na tabela   
+    function find()
+    {
+      //Pesquisa na tabela Companies se tem o número de ID 2
+      //referente a FK da tabela Users
+      return Users::find(2)->myCompany;
+    }
 
 
