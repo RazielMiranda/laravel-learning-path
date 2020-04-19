@@ -1,7 +1,3 @@
-# Implementando interface UI
-
-1. 
-=======
 # Laravel 7 tutorial
 
 Tutorial de como utilizar o Laravel 7 seguindo o vídeo do canal PHP STEP BY STEP:
